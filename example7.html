@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planpix | Professional Property Marketing</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Quicksand', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cyan: '#00B8F0',
+                            dark: '#0a0a0b',
+                            charcoal: '#1a1a1a',
+                            light: '#f4f4ed'
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 1. TEXTURE & ATMOSPHERE (Robustness) */
+        body {
+            background-color: #0a0a0b;
+            color: #ffffff;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Noise Overlay for Texture */
+        .bg-noise::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.04;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            z-index: 50;
+        }
+
+        /* 2. TYPOGRAPHY (Intrigue) */
+        .text-outline {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            color: transparent;
+        }
+        .text-outline-cyan {
+            -webkit-text-stroke: 1px #00B8F0;
+            color: transparent;
+        }
+
+        /* 3. INTERACTIONS (Attention to Detail) */
+        .nav-glass {
+            background: rgba(10, 10, 11, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-glass:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #00B8F0;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0, 184, 240, 0.2);
+        }
+
+        .btn-primary {
+            background: #00B8F0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 184, 240, 0.3);
+        }
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 184, 240, 0.6);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0b; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00B8F0; }
+    </style>
+</head>
+<body class="bg-noise selection:bg-brand-cyan selection:text-white">
+
+    <div id="cookie-modal" class="fixed bottom-4 right-4 z-[100] max-w-sm w-full" data-aos="fade-left" data-aos-delay="2000">
+        <div class="bg-brand-charcoal/90 backdrop-blur-md border border-brand-cyan/30 p-6 rounded-2xl shadow-2xl">
+            <div class="flex items-start gap-4">
+                <i class="fas fa-cookie-bite text-brand-cyan text-2xl mt-1"></i>
+                <div>
+                    <h4 class="font-bold text-white mb-2">Privacy & Quality</h4>
+                    <p class="text-xs text-gray-400 mb-4 leading-relaxed">We use cookies to ensure the robustness and reliability of your experience on Planpix.</p>
+                    <div class="flex gap-3">
+                        <button onclick="document.getElementById('cookie-modal').style.display='none'" class="bg-brand-cyan text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-white hover:text-brand-dark transition">Accept</button>
+                        <button onclick="document.getElementById('cookie-modal').style.display='none'" class="text-xs text-gray-500 hover:text-white transition">Dismiss</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-brand-charcoal text-[11px] font-bold uppercase tracking-widest text-gray-400 py-3 border-b border-white/5 relative z-50">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <span class="hidden md:block">London & Kent Property Specialists</span>
+            <div class="flex gap-6">
+                <a href="mailto:hello@planpix.com" class="hover:text-brand-cyan transition"><i class="fa-regular fa-envelope mr-2"></i>hello@planpix.com</a>
+                <a href="tel:02081459989" class="hover:text-brand-cyan transition"><i class="fa-solid fa-phone mr-2"></i>020 8145 9989</a>
+            </div>
+        </div>
+    </div>
+
+    <header class="sticky top-0 w-full z-40 nav-glass transition-all duration-300">
+        <nav class="container mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2 text-2xl font-bold text-white tracking-tight">
+                <i class="fa-solid fa-camera-retro text-brand-cyan"></i> PLANPIX
+            </div>
+
+            <div class="hidden lg:flex gap-8 text-[13px] font-bold uppercase tracking-wide text-gray-300">
+                <a href="index.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 1</a>
+                <a href="example2.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 2</a>
+                <a href="example3.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 3</a>
+                <a href="example4.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 4</a>
+                <a href="example5.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 5</a>
+                <a href="example6.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 6</a>
+                <a href="example7.html" class="text-brand-cyan transition-colors">Example 7</a>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="#" class="text-sm font-bold text-gray-400 hover:text-white transition hidden md:block">Login</a>
+                <a href="#" class="btn-primary px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest">
+                    Place Order
+                </a>
+                <button class="lg:hidden text-white text-xl"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" 
+                 class="w-full h-full object-cover opacity-30 grayscale mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/50"></div>
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-cyan rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-blob"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-900 rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-blob animation-delay-2000"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <div class="inline-block border border-brand-cyan/30 bg-brand-cyan/10 px-4 py-1.5 rounded-full mb-8 backdrop-blur-sm" data-aos="fade-down">
+                <span class="text-brand-cyan text-[10px] font-black uppercase tracking-[0.2em]">Established 10+ Years</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-8xl font-bold leading-none tracking-tighter mb-8" data-aos="zoom-out-up" data-aos-duration="1000">
+                BRINGING SPACES<br>
+                <span class="text-outline-cyan">TO LIFE.</span>
+            </h1>
+            
+            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                Professional virtual tours, photography, and interactive floor plans. 
+                <span class="text-white font-medium">The complete property marketing suite in a single visit.</span>
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
+                <button class="btn-primary px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3">
+                    View Portfolio <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <button class="px-8 py-4 rounded-full font-bold text-white border border-white/20 hover:bg-white hover:text-black transition duration-300 backdrop-blur-sm">
+                    Our Services
+                </button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-brand-cyan/50 text-2xl">
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section id="story" class="py-32 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-20 items-center">
+                <div data-aos="fade-right">
+                    <span class="text-brand-cyan font-bold uppercase tracking-widest text-xs mb-4 block">The Planpix Standard</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">
+                        Not just another <br>photography service.
+                    </h2>
+                    <div class="space-y-6 text-gray-400 text-lg leading-relaxed">
+                        <p>
+                            <span class="text-white font-bold">Planpix</span> has been defining property marketing standards for over a decade. We started with a simple mission in Bexley: to provide reliability in an industry full of inconsistency.
+                        </p>
+                        <p>
+                            We aren't gig-economy freelancers. We are a dedicated team offering a robust "one-stop-shop" solution. From High-End HDR Photography to Certified EPCs, we handle the complexity so you can focus on selling.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8 mt-12 border-t border-white/10 pt-8">
+                        <div>
+                            <div class="text-3xl font-bold text-white mb-1">10+</div>
+                            <div class="text-xs uppercase tracking-widest text-brand-cyan">Years Experience</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold text-white mb-1">100%</div>
+                            <div class="text-xs uppercase tracking-widest text-brand-cyan">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group" data-aos="fade-left">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-brand-cyan to-blue-600 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition duration-1000"></div>
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" 
+                             class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                        
+                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-8">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-brand-cyan text-white flex items-center justify-center text-xl">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-white">Fully Insured & Accredited</p>
+                                    <p class="text-xs text-gray-400">Rest easy knowing you're covered.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-24 bg-brand-charcoal relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#00B8F0]/5 to-transparent pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Everything You Need.</h2>
+                <p class="text-gray-400">One visit. One team. Complete marketing suite.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="0">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-camera"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Photography</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">High-end HDR photography that captures the true essence and light of every room. No over-processing, just clarity.</p>
+                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">View Gallery</span>
+                </div>
+
+                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
+                        <i class="fa-regular fa-map"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Floor Plans</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Laser-measured accuracy. We produce clear 2D and 3D plans that help buyers visualize the layout instantly.</p>
+                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">See Examples</span>
+                </div>
+
+                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-street-view"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Virtual Tours</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Immersive 360° walkthroughs. Allow buyers to inspect properties from the comfort of their own homes.</p>
+                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">Start Tour</span>
+                </div>
+
+                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-plane-up"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Drone</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Aerial photography and videography to showcase land plots, roofing, and location context.</p>
+                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">View Heights</span>
+                </div>
+
+                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="400">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">EPC</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Certified Energy Performance Certificates. Fast turnaround for compliance and peace of mind.</p>
+                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">Learn More</span>
+                </div>
+
+                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="500">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
+                        <i class="fa-regular fa-circle-play"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Cinematic Video</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Social media reels and full property trailers that tell a compelling story and boost engagement.</p>
+                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">Watch Reels</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-0">
+        <div class="grid md:grid-cols-4 h-auto md:h-[500px]">
+            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer border-r border-white/5">
+                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
+                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
+                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Modern Interiors</h3>
+                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">Photography</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer border-r border-white/5">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
+                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
+                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Kitchen Detail</h3>
+                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">Staging</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer border-r border-white/5">
+                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
+                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
+                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Living Spaces</h3>
+                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">3D Tours</p>
+                </div>
+            </div>
+            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
+                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
+                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Exterior Drone</h3>
+                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">Aerial View</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-32 px-6 flex justify-center">
+        <div class="max-w-4xl text-center relative" data-aos="zoom-in">
+            <i class="fa-solid fa-quote-left text-brand-cyan text-6xl absolute -top-10 -left-10 opacity-20"></i>
+            <h2 class="text-3xl md:text-5xl font-light italic leading-tight text-white mb-12 relative z-10">
+                "Excellent, prompt service. Really impressed with the quality of the photography and the timescale submitting it to the estate agent. Highly recommended."
+            </h2>
+            <div class="flex flex-col items-center gap-3">
+                <div class="flex text-brand-cyan text-lg gap-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <div class="text-white font-bold uppercase tracking-widest text-sm">Yeliz, Bexley</div>
+                <div class="text-gray-500 text-xs">Verified Client</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black pt-20 pb-10 border-t border-white/5 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-20 mb-20">
+                <div>
+                    <h2 class="text-[12vw] lg:text-[150px] leading-[0.8] font-black tracking-tighter text-white mb-10 opacity-20 hover:opacity-100 transition duration-500 cursor-default">
+                        SAY<br><span class="text-brand-cyan">HELLO.</span>
+                    </h2>
+                </div>
+                <div class="flex flex-col justify-center space-y-8">
+                    <h4 class="text-gray-500 uppercase tracking-widest font-bold text-sm">Ready to stand out?</h4>
+                    <p class="text-2xl text-white font-medium">Join hundreds of estate agents and homeowners in Kent & London who trust Planpix.</p>
+                    
+                    <div class="flex flex-col md:flex-row gap-8 text-lg font-bold">
+                        <a href="mailto:hello@planpix.com" class="flex items-center gap-3 hover:text-brand-cyan transition"><i class="fa-regular fa-envelope"></i> hello@planpix.com</a>
+                        <a href="tel:02081459989" class="flex items-center gap-3 hover:text-brand-cyan transition"><i class="fa-solid fa-phone"></i> 020 8145 9989</a>
+                    </div>
+                    
+                    <div class="flex gap-6 mt-8">
+                        <a href="#" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-cyan hover:border-brand-cyan transition duration-300"><i class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="#" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-cyan hover:border-brand-cyan transition duration-300"><i class="fa-brands fa-facebook-f text-xl"></i></a>
+                        <a href="#" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-cyan hover:border-brand-cyan transition duration-300"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-bold uppercase tracking-wide">
+                <p>&copy; 2026 Planpix. All Rights Reserved.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Animations
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic',
+            offset: 50
+        });
+
+        // Sticky Navigation Logic
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-0');
+                header.classList.remove('py-4');
+            } else {
+                header.classList.add('py-4');
+                header.classList.remove('py-0');
+            }
+        });
+    </script>
+</body>
+</html>
