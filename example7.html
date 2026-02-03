@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planpix | Professional Property Marketing</title>
+    <title>Planpix | Visual Property Marketing</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <script>
@@ -21,21 +24,12 @@
                     colors: {
                         brand: {
                             cyan: '#00B8F0',
-                            dark: '#0a0a0b',
-                            charcoal: '#1a1a1a',
-                            light: '#f4f4ed'
+                            dark: '#1a1a1a',
+                            light: '#f8f9fa'
                         }
                     },
-                    animation: {
-                        'blob': 'blob 10s infinite',
-                    },
-                    keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        }
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(0, 184, 240, 0.5)',
                     }
                 }
             }
@@ -43,390 +37,367 @@
     </script>
 
     <style>
-        /* 1. TEXTURE & ATMOSPHERE (Robustness) */
-        body {
-            background-color: #0a0a0b;
-            color: #ffffff;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+        /* --- ANIMATION KEYFRAMES --- */
+
+        /* 1. Horizontal Scroll (Left) - Used for Header Logos & Feedback */
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } 
+        }
+
+        /* 2. Vertical Scroll (Up) - Used for Portfolio */
+        @keyframes scrollUp {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-50%); } 
+        }
+
+        /* 3. Vertical Scroll (Down) - Used for Portfolio */
+        @keyframes scrollDown {
+            0% { transform: translateY(-50%); }
+            100% { transform: translateY(0); } 
+        }
+
+        /* --- ANIMATION CLASSES --- */
+        .animate-scroll-left {
+            animation: scrollLeft 30s linear infinite;
+        }
+        .animate-scroll-up {
+            animation: scrollUp 15s linear infinite; /* Fast speed */
+        }
+        .animate-scroll-down {
+            animation: scrollDown 15s linear infinite; /* Fast speed */
+        }
+
+        /* Pause animations on hover */
+        .hover\:pause:hover {
+            animation-play-state: paused;
+        }
+
+        /* --- UTILITIES --- */
+        .mask-gradient-x {
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        .mask-gradient-y {
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
         }
         
-        /* Noise Overlay for Texture */
-        .bg-noise::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.04;
-            pointer-events: none;
+        .bg-noise {
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            z-index: 50;
         }
-
-        /* 2. TYPOGRAPHY (Intrigue) */
-        .text-outline {
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-            color: transparent;
-        }
-        .text-outline-cyan {
-            -webkit-text-stroke: 1px #00B8F0;
-            color: transparent;
-        }
-
-        /* 3. INTERACTIONS (Attention to Detail) */
-        .nav-glass {
-            background: rgba(10, 10, 11, 0.7);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .card-glass {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .card-glass:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: #00B8F0;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -15px rgba(0, 184, 240, 0.2);
-        }
-
-        .btn-primary {
-            background: #00B8F0;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(0, 184, 240, 0.3);
-        }
-        .btn-primary:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 184, 240, 0.6);
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0b; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00B8F0; }
     </style>
 </head>
-<body class="bg-noise selection:bg-brand-cyan selection:text-white">
+<body class="font-sans antialiased bg-white text-gray-800 selection:bg-brand-cyan selection:text-white">
 
-    <div id="cookie-modal" class="fixed bottom-4 right-4 z-[100] max-w-sm w-full" data-aos="fade-left" data-aos-delay="2000">
-        <div class="bg-brand-charcoal/90 backdrop-blur-md border border-brand-cyan/30 p-6 rounded-2xl shadow-2xl">
-            <div class="flex items-start gap-4">
-                <i class="fas fa-cookie-bite text-brand-cyan text-2xl mt-1"></i>
-                <div>
-                    <h4 class="font-bold text-white mb-2">Privacy & Quality</h4>
-                    <p class="text-xs text-gray-400 mb-4 leading-relaxed">We use cookies to ensure the robustness and reliability of your experience on Planpix.</p>
-                    <div class="flex gap-3">
-                        <button onclick="document.getElementById('cookie-modal').style.display='none'" class="bg-brand-cyan text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-white hover:text-brand-dark transition">Accept</button>
-                        <button onclick="document.getElementById('cookie-modal').style.display='none'" class="text-xs text-gray-500 hover:text-white transition">Dismiss</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-brand-charcoal text-[11px] font-bold uppercase tracking-widest text-gray-400 py-3 border-b border-white/5 relative z-50">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <span class="hidden md:block">London & Kent Property Specialists</span>
-            <div class="flex gap-6">
-                <a href="mailto:hello@planpix.com" class="hover:text-brand-cyan transition"><i class="fa-regular fa-envelope mr-2"></i>hello@planpix.com</a>
-                <a href="tel:02081459989" class="hover:text-brand-cyan transition"><i class="fa-solid fa-phone mr-2"></i>020 8145 9989</a>
-            </div>
-        </div>
-    </div>
-
-    <header class="sticky top-0 w-full z-40 nav-glass transition-all duration-300">
-        <nav class="container mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-2 text-2xl font-bold text-white tracking-tight">
-                <i class="fa-solid fa-camera-retro text-brand-cyan"></i> PLANPIX
-            </div>
-
-            <div class="hidden lg:flex gap-8 text-[13px] font-bold uppercase tracking-wide text-gray-300">
-                <a href="index.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 1</a>
-                <a href="example2.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 2</a>
-                <a href="example3.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 3</a>
-                <a href="example4.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 4</a>
-                <a href="example5.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 5</a>
-                <a href="example6.html" class="text-gray-300 hover:text-brand-cyan transition-colors">Example 6</a>
-                <a href="example7.html" class="text-brand-cyan transition-colors">Example 7</a>
-            </div>
-
-            <div class="flex items-center gap-6">
-                <a href="#" class="text-sm font-bold text-gray-400 hover:text-white transition hidden md:block">Login</a>
-                <a href="#" class="btn-primary px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest">
-                    Place Order
-                </a>
-                <button class="lg:hidden text-white text-xl"><i class="fa-solid fa-bars"></i></button>
-            </div>
-        </nav>
-    </header>
-
-    <section id="home" class="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" 
-                 class="w-full h-full object-cover opacity-30 grayscale mix-blend-overlay">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-brand-dark/50"></div>
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-cyan rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-blob"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-900 rounded-full mix-blend-screen filter blur-[120px] opacity-20 animate-blob animation-delay-2000"></div>
-        </div>
-
-        <div class="relative z-10 container mx-auto px-6 text-center">
-            <div class="inline-block border border-brand-cyan/30 bg-brand-cyan/10 px-4 py-1.5 rounded-full mb-8 backdrop-blur-sm" data-aos="fade-down">
-                <span class="text-brand-cyan text-[10px] font-black uppercase tracking-[0.2em]">Established 10+ Years</span>
-            </div>
-            
-            <h1 class="text-5xl md:text-8xl font-bold leading-none tracking-tighter mb-8" data-aos="zoom-out-up" data-aos-duration="1000">
-                BRINGING SPACES<br>
-                <span class="text-outline-cyan">TO LIFE.</span>
-            </h1>
-            
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed" data-aos="fade-up" data-aos-delay="200">
-                Professional virtual tours, photography, and interactive floor plans. 
-                <span class="text-white font-medium">The complete property marketing suite in a single visit.</span>
-            </p>
-
-            <div class="flex flex-col sm:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
-                <button class="btn-primary px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3">
-                    View Portfolio <i class="fa-solid fa-arrow-right"></i>
-                </button>
-                <button class="px-8 py-4 rounded-full font-bold text-white border border-white/20 hover:bg-white hover:text-black transition duration-300 backdrop-blur-sm">
-                    Our Services
-                </button>
-            </div>
-        </div>
+    <section class="relative h-screen w-full overflow-hidden flex flex-col justify-center">
         
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-brand-cyan/50 text-2xl">
-            <i class="fa-solid fa-chevron-down"></i>
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <header class="absolute top-0 w-full z-50 p-6 md:p-10 flex justify-between items-center">
+            <div class="text-3xl font-bold tracking-tight flex items-center gap-2 drop-shadow-md text-white">
+                <i class="fa-solid fa-camera-retro text-brand-cyan"></i> Planpix
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm font-bold text-white tracking-wide drop-shadow-md">
+                <a href="#" class="hover:text-brand-cyan transition duration-300">Our Solution</a>
+                <a href="#" class="hover:text-brand-cyan transition duration-300">Galleries</a>
+                <a href="#" class="hover:text-brand-cyan transition duration-300">Who we are</a>
+            </nav>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden md:block px-6 py-2.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white font-bold text-sm hover:bg-brand-cyan hover:border-brand-cyan transition duration-300">
+                    Get in touch <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#" class="px-6 py-2.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white font-bold text-sm hover:bg-brand-cyan hover:border-brand-cyan transition duration-300">
+                    Login <i class="fa-solid fa-arrow-right-to-bracket ml-2"></i>
+                </a>
+            </div>
+        </header>
+
+        <div class="relative z-10 container mx-auto px-6 md:px-12 text-center md:text-left pt-20">
+            <h1 class="text-5xl md:text-8xl font-bold leading-tight mb-6 drop-shadow-lg text-white">
+                <span class="text-brand-cyan">Visual</span><br>Property<br>Marketing
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-xl font-medium drop-shadow-md">
+                High-quality marketing assets for estate agents crafted by property experts. Photography, Floor Plans, and Virtual Tours.
+            </p>
+            <button class="px-10 py-4 bg-brand-cyan text-white rounded-full font-bold shadow-lg shadow-brand-cyan/30 hover:bg-white hover:text-brand-dark transition transform hover:scale-105 duration-300">
+                Our Solution <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+
+        <div class="absolute bottom-0 w-full z-20 bg-black/60 backdrop-blur-md border-t border-white/10 py-6 overflow-hidden">
+            <div class="flex w-[200%] animate-scroll-left">
+                <div class="flex w-1/2 justify-around items-center gap-12 px-12 text-gray-400 text-xl font-bold uppercase tracking-widest whitespace-nowrap">
+                    <span class="hover:text-white transition"><i class="fa-solid fa-building text-brand-cyan mr-2"></i> Anthony Dawson</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-house text-brand-cyan mr-2"></i> Ball & Percival</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-city text-brand-cyan mr-2"></i> Balmer & Co</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-landmark text-brand-cyan mr-2"></i> Benson Bunch</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-key text-brand-cyan mr-2"></i> Butler Ridge</span>
+                </div>
+                <div class="flex w-1/2 justify-around items-center gap-12 px-12 text-gray-400 text-xl font-bold uppercase tracking-widest whitespace-nowrap">
+                    <span class="hover:text-white transition"><i class="fa-solid fa-building text-brand-cyan mr-2"></i> Anthony Dawson</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-house text-brand-cyan mr-2"></i> Ball & Percival</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-city text-brand-cyan mr-2"></i> Balmer & Co</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-landmark text-brand-cyan mr-2"></i> Benson Bunch</span>
+                    <span class="hover:text-white transition"><i class="fa-solid fa-key text-brand-cyan mr-2"></i> Butler Ridge</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="story" class="py-32 relative">
-        <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-20 items-center">
+    <section class="py-24 bg-white text-gray-800">
+        <div class="max-w-7xl mx-auto px-6 md:px-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-20">
                 <div data-aos="fade-right">
-                    <span class="text-brand-cyan font-bold uppercase tracking-widest text-xs mb-4 block">The Planpix Standard</span>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight">
-                        Not just another <br>photography service.
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="h-1 w-10 bg-brand-cyan rounded-full"></div>
+                        <span class="font-bold text-gray-400 uppercase text-xs tracking-widest">Story of Planpix</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-8 leading-tight text-brand-dark">
+                        Passion for bringing <br><span class="text-brand-cyan">spaces to life.</span>
                     </h2>
-                    <div class="space-y-6 text-gray-400 text-lg leading-relaxed">
-                        <p>
-                            <span class="text-white font-bold">Planpix</span> has been defining property marketing standards for over a decade. We started with a simple mission in Bexley: to provide reliability in an industry full of inconsistency.
-                        </p>
-                        <p>
-                            We aren't gig-economy freelancers. We are a dedicated team offering a robust "one-stop-shop" solution. From High-End HDR Photography to Certified EPCs, we handle the complexity so you can focus on selling.
-                        </p>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-8 mt-12 border-t border-white/10 pt-8">
-                        <div>
-                            <div class="text-3xl font-bold text-white mb-1">10+</div>
-                            <div class="text-xs uppercase tracking-widest text-brand-cyan">Years Experience</div>
-                        </div>
-                        <div>
-                            <div class="text-3xl font-bold text-white mb-1">100%</div>
-                            <div class="text-xs uppercase tracking-widest text-brand-cyan">Client Satisfaction</div>
-                        </div>
+                    <div class="space-y-6 text-lg text-gray-600 font-medium leading-relaxed">
+                        <p>We started out offering EPCs to a small number of clients in and around Bexley. Word soon spread, and as our reputation grew, we evolved.</p>
+                        <p>Today, we are proud to offer a complete marketing suite. We aren't just a service provider; we are an extension of your team.</p>
                     </div>
                 </div>
-
-                <div class="relative group" data-aos="fade-left">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-brand-cyan to-blue-600 rounded-2xl blur-lg opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10">
-                        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80" 
-                             class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
-                        
-                        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-8">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 rounded-full bg-brand-cyan text-white flex items-center justify-center text-xl">
-                                    <i class="fa-solid fa-check"></i>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-white">Fully Insured & Accredited</p>
-                                    <p class="text-xs text-gray-400">Rest easy knowing you're covered.</p>
-                                </div>
-                            </div>
+                <div class="relative" data-aos="fade-left">
+                    <div class="relative h-[500px] rounded-[3rem] overflow-hidden shadow-2xl transform md:rotate-2 hover:rotate-0 transition duration-500 border border-gray-100">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
+                        <div class="absolute top-8 right-8 bg-white/95 backdrop-blur text-center p-4 rounded-2xl shadow-lg border border-gray-100">
+                            <span class="block text-3xl font-bold text-brand-cyan">10+</span>
+                            <span class="block text-xs font-bold text-gray-600 uppercase">Years exp.</span>
                         </div>
                     </div>
+                    <div class="absolute -z-10 bottom-[-30px] right-[-30px] w-64 h-64 bg-brand-cyan/5 rounded-full"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 pt-12 border-t border-gray-100" data-aos="fade-up">
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-brand-cyan/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-cyan/10 transition">
+                        <i class="fa-regular fa-clock text-4xl text-brand-cyan"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">24hr Turn-Around*</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We aim to get our standard packages to you the next working day.</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-brand-cyan/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-cyan/10 transition">
+                        <i class="fa-regular fa-gem text-4xl text-brand-cyan"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Quality Guaranteed</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We use only the best equipment and expertise to bring you quality.</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-brand-cyan/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-cyan/10 transition">
+                        <i class="fa-solid fa-sterling-sign text-4xl text-brand-cyan"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fair Pricing</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Bundling our services together offers real value for money.</p>
+                </div>
+                <div class="text-center group">
+                    <div class="w-20 h-20 mx-auto bg-brand-cyan/5 rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-cyan/10 transition">
+                        <i class="fa-solid fa-users text-4xl text-brand-cyan"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Personal Touch</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We pride ourselves on getting the very best shots on the appointment.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-24 bg-brand-charcoal relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#00B8F0]/5 to-transparent pointer-events-none"></div>
+    <section class="py-24 bg-brand-dark w-full">
+        <div class="text-center mb-16 px-6" data-aos="fade-up">
+            <span class="text-brand-cyan font-bold tracking-widest uppercase text-sm">What We Do</span>
+            <h2 class="text-4xl md:text-6xl font-bold mt-4 text-white">Our Core Services</h2>
+            <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Comprehensive visual marketing solutions.</p>
+        </div>
 
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full mb-20">
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="0"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-camera text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Photography</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="100"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-regular fa-map text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Floor Plans</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="200"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-street-view text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Virtual Tours</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="300"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-plane-up text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Drone</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="400"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-chart-simple text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">EPC</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="500"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-regular fa-circle-play text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Video</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="600"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-moon text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Twilight Photo</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="700"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-star text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Premium Photo</h3></div></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6" data-aos="zoom-in">
+            <div class="bg-brand-cyan rounded-[3rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-2xl shadow-brand-cyan/20">
+                <div class="text-center md:text-left relative z-10 max-w-xl">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">All in one visit</h3>
+                    <p class="text-white/90 font-medium text-lg leading-relaxed">
+                        We produce stunning photographs, a floor plan, an Energy Performance and a virtual tour in a single visit.
+                    </p>
+                </div>
+                <div class="mt-8 md:mt-0 relative z-10">
+                    <button class="bg-white text-brand-cyan px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300 shadow-lg">
+                        Book Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+                <div class="absolute -right-20 -bottom-32 w-80 h-80 bg-white/10 rounded-full blur-xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="container mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-end">
+            <div data-aos="fade-right">
+                <span class="text-brand-cyan font-bold tracking-widest uppercase text-sm">Our Work</span>
+                <h2 class="text-4xl md:text-5xl font-bold mt-2 text-brand-dark">Featured Projects</h2>
+            </div>
+            <a href="#" class="hidden md:inline-block border-b-2 border-brand-cyan text-brand-dark font-bold hover:text-brand-cyan transition pb-1" data-aos="fade-left">View All Galleries</a>
+        </div>
+
+        <div class="relative w-full h-[600px] overflow-hidden bg-gray-50">
+            <div class="container mx-auto h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+                <div class="relative h-full overflow-hidden mask-gradient-y"><div class="flex flex-col gap-6 animate-scroll-up w-full">
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                </div></div>
+                <div class="relative h-full overflow-hidden mask-gradient-y"><div class="flex flex-col gap-6 animate-scroll-down w-full" style="animation-delay: -5s;">
+                     <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                     <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                     <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                     <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                     <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                </div></div>
+                 <div class="relative h-full overflow-hidden mask-gradient-y hidden lg:block"><div class="flex flex-col gap-6 animate-scroll-up w-full" style="animation-delay: -2s;">
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                </div></div>
+                 <div class="relative h-full overflow-hidden mask-gradient-y hidden lg:block"><div class="flex flex-col gap-6 animate-scroll-down w-full" style="animation-delay: -7s;">
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                    <div class="h-64 rounded-[2rem] overflow-hidden"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover"></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-brand-dark overflow-hidden relative">
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0 bg-noise"></div>
         <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Everything You Need.</h2>
-                <p class="text-gray-400">One visit. One team. Complete marketing suite.</p>
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-brand-cyan font-bold tracking-widest uppercase text-sm">Testimonials</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2 text-white">Trusted by Agents</h2>
+            </div>
+            
+            <div class="relative w-full overflow-hidden mask-gradient-x mb-32">
+                <div class="flex gap-8 animate-scroll-left w-max hover:pause">
+                    <div class="w-[500px] bg-[#111] p-10 rounded-[2rem] border border-white/5 shadow-2xl flex flex-col items-center text-center relative shrink-0">
+                        <span class="text-brand-cyan text-xs font-bold uppercase tracking-widest mb-6">Client Feedback</span>
+                        <p class="text-white text-xl italic leading-relaxed mb-6">"Excellent, prompt service. Really impressed with the quality and timescale."</p>
+                        <h4 class="text-white font-bold text-lg">Yeliz</h4>
+                        <div class="text-yellow-400 text-xs gap-1 flex justify-center mt-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                     <div class="w-[500px] bg-[#111] p-10 rounded-[2rem] border border-white/5 shadow-2xl flex flex-col items-center text-center relative shrink-0">
+                        <span class="text-brand-cyan text-xs font-bold uppercase tracking-widest mb-6">Client Feedback</span>
+                        <p class="text-white text-xl italic leading-relaxed mb-6">"Planpix transformed our listings. The virtual tours have reduced wasted viewings."</p>
+                        <h4 class="text-white font-bold text-lg">James M.</h4>
+                        <div class="text-yellow-400 text-xs gap-1 flex justify-center mt-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                    <div class="w-[500px] bg-[#111] p-10 rounded-[2rem] border border-white/5 shadow-2xl flex flex-col items-center text-center relative shrink-0">
+                        <span class="text-brand-cyan text-xs font-bold uppercase tracking-widest mb-6">Client Feedback</span>
+                        <p class="text-white text-xl italic leading-relaxed mb-6">"Excellent, prompt service. Really impressed with the quality and timescale."</p>
+                        <h4 class="text-white font-bold text-lg">Yeliz</h4>
+                        <div class="text-yellow-400 text-xs gap-1 flex justify-center mt-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                     <div class="w-[500px] bg-[#111] p-10 rounded-[2rem] border border-white/5 shadow-2xl flex flex-col items-center text-center relative shrink-0">
+                        <span class="text-brand-cyan text-xs font-bold uppercase tracking-widest mb-6">Client Feedback</span>
+                        <p class="text-white text-xl italic leading-relaxed mb-6">"Planpix transformed our listings. The virtual tours have reduced wasted viewings."</p>
+                        <h4 class="text-white font-bold text-lg">James M.</h4>
+                        <div class="text-yellow-400 text-xs gap-1 flex justify-center mt-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    </div>
+                </div>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="0">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
-                        <i class="fa-solid fa-camera"></i>
+            <div class="relative w-full rounded-[3rem] overflow-hidden bg-black border border-white/10 p-12 md:p-24 text-center" data-aos="zoom-in">
+                <div class="absolute top-[-50%] left-[-20%] w-[800px] h-[800px] bg-brand-cyan rounded-full mix-blend-screen filter blur-[150px] opacity-20 animate-pulse"></div>
+                <div class="absolute bottom-[-50%] right-[-20%] w-[800px] h-[800px] bg-purple-900 rounded-full mix-blend-screen filter blur-[150px] opacity-30 animate-pulse"></div>
+                <div class="relative z-10 max-w-3xl mx-auto">
+                    <i class="fa-solid fa-quote-left text-4xl text-brand-cyan mb-8 opacity-80"></i>
+                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-10 leading-tight">We're passionate about bringing spaces to life. <span class="text-brand-cyan">Together with you.</span></h2>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                        <button class="bg-gradient-to-r from-brand-cyan to-blue-500 text-white px-10 py-4 rounded-full font-bold hover:scale-105 transition">Say Hello</button>
+                        <button class="border border-white/30 bg-white/5 backdrop-blur text-white px-10 py-4 rounded-full font-bold hover:bg-white/10 transition">Place an Order</button>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Photography</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">High-end HDR photography that captures the true essence and light of every room. No over-processing, just clarity.</p>
-                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">View Gallery</span>
-                </div>
-
-                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
-                        <i class="fa-regular fa-map"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Floor Plans</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Laser-measured accuracy. We produce clear 2D and 3D plans that help buyers visualize the layout instantly.</p>
-                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">See Examples</span>
-                </div>
-
-                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
-                        <i class="fa-solid fa-street-view"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Virtual Tours</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Immersive 360° walkthroughs. Allow buyers to inspect properties from the comfort of their own homes.</p>
-                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">Start Tour</span>
-                </div>
-
-                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
-                        <i class="fa-solid fa-plane-up"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Drone</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Aerial photography and videography to showcase land plots, roofing, and location context.</p>
-                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">View Heights</span>
-                </div>
-
-                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
-                        <i class="fa-solid fa-chart-simple"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">EPC</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Certified Energy Performance Certificates. Fast turnaround for compliance and peace of mind.</p>
-                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">Learn More</span>
-                </div>
-
-                <div class="card-glass p-10 rounded-3xl group cursor-pointer" data-aos="fade-up" data-aos-delay="500">
-                    <div class="w-16 h-16 rounded-2xl bg-brand-cyan/10 flex items-center justify-center text-brand-cyan text-3xl mb-8 group-hover:bg-brand-cyan group-hover:text-white transition-colors duration-300">
-                        <i class="fa-regular fa-circle-play"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 group-hover:text-brand-cyan transition-colors">Cinematic Video</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">Social media reels and full property trailers that tell a compelling story and boost engagement.</p>
-                    <span class="text-xs font-bold uppercase tracking-widest text-white border-b border-brand-cyan pb-1">Watch Reels</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="portfolio" class="py-0">
-        <div class="grid md:grid-cols-4 h-auto md:h-[500px]">
-            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer border-r border-white/5">
-                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
-                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
-                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Modern Interiors</h3>
-                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">Photography</p>
-                </div>
+    <section class="py-24 bg-brand-dark border-t border-white/5 relative z-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <i class="fa-brands fa-instagram text-brand-cyan text-4xl mb-4"></i>
+                <h3 class="text-3xl md:text-4xl font-bold text-white">Follow us <span class="text-brand-cyan">@Planpix</span></h3>
             </div>
-            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer border-r border-white/5">
-                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
-                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
-                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Kitchen Detail</h3>
-                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">Staging</p>
-                </div>
-            </div>
-            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer border-r border-white/5">
-                <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
-                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
-                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Living Spaces</h3>
-                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">3D Tours</p>
-                </div>
-            </div>
-            <div class="group relative overflow-hidden h-96 md:h-full cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:grayscale-0 grayscale">
-                <div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-90 transition duration-300 flex flex-col items-center justify-center text-center p-6">
-                    <h3 class="text-2xl font-bold text-white translate-y-4 group-hover:translate-y-0 transition duration-300">Exterior Drone</h3>
-                    <p class="text-sm text-white/80 mt-2 translate-y-4 group-hover:translate-y-0 transition duration-300 delay-75">Aerial View</p>
-                </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-12 max-w-6xl mx-auto">
+                <a href="#" class="relative group cursor-pointer overflow-hidden h-64 block rounded-lg" data-aos="zoom-in" data-aos-delay="0"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"><div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"><i class="fa-brands fa-instagram text-white text-4xl"></i></div></a>
+                <a href="#" class="relative group cursor-pointer overflow-hidden h-64 block rounded-lg" data-aos="zoom-in" data-aos-delay="100"><img src="https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"><div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"><i class="fa-brands fa-instagram text-white text-4xl"></i></div></a>
+                <a href="#" class="relative group cursor-pointer overflow-hidden h-64 block rounded-lg" data-aos="zoom-in" data-aos-delay="200"><img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"><div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"><i class="fa-brands fa-instagram text-white text-4xl"></i></div></a>
+                <a href="#" class="relative group cursor-pointer overflow-hidden h-64 block rounded-lg" data-aos="zoom-in" data-aos-delay="300"><img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"><div class="absolute inset-0 bg-brand-cyan/90 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"><i class="fa-brands fa-instagram text-white text-4xl"></i></div></a>
             </div>
         </div>
     </section>
 
-    <section id="reviews" class="py-32 px-6 flex justify-center">
-        <div class="max-w-4xl text-center relative" data-aos="zoom-in">
-            <i class="fa-solid fa-quote-left text-brand-cyan text-6xl absolute -top-10 -left-10 opacity-20"></i>
-            <h2 class="text-3xl md:text-5xl font-light italic leading-tight text-white mb-12 relative z-10">
-                "Excellent, prompt service. Really impressed with the quality of the photography and the timescale submitting it to the estate agent. Highly recommended."
-            </h2>
-            <div class="flex flex-col items-center gap-3">
-                <div class="flex text-brand-cyan text-lg gap-1">
-                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+    <footer class="bg-brand-cyan text-white py-20 px-8 rounded-t-[60px] md:rounded-t-[100px] mt-0 relative z-30">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <h3 class="text-3xl font-bold mb-6 flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-camera-retro"></i> Planpix
+                </h3>
+                <p class="text-blue-100 mb-8">Ready to make your listings stand out? Reach out to our team today.</p>
+                <a href="mailto:hello@planpix.com" class="text-xl font-bold border-b-2 border-white pb-2 hover:text-brand-dark hover:border-brand-dark transition">hello@planpix.com</a>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase tracking-widest text-sm text-blue-100">Quick Links</h4>
+                <ul class="space-y-3 text-white font-medium">
+                    <li><a href="#" class="hover:text-brand-dark transition">Home</a></li>
+                    <li><a href="#" class="hover:text-brand-dark transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-brand-dark transition">Our Services</a></li>
+                    <li><a href="#" class="hover:text-brand-dark transition">Our Portfolio</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase tracking-widest text-sm text-blue-100">Connect</h4>
+                <p class="text-white font-bold text-lg mb-2">020 8145 9989</p>
+                <div class="mt-6 flex justify-center md:justify-start space-x-6 text-2xl">
+                    <a href="#" class="hover:text-brand-dark transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-brand-dark transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-brand-dark transition"><i class="fab fa-twitter"></i></a>
                 </div>
-                <div class="text-white font-bold uppercase tracking-widest text-sm">Yeliz, Bexley</div>
-                <div class="text-gray-500 text-xs">Verified Client</div>
             </div>
         </div>
-    </section>
-
-    <footer class="bg-black pt-20 pb-10 border-t border-white/5 relative overflow-hidden">
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-20 mb-20">
-                <div>
-                    <h2 class="text-[12vw] lg:text-[150px] leading-[0.8] font-black tracking-tighter text-white mb-10 opacity-20 hover:opacity-100 transition duration-500 cursor-default">
-                        SAY<br><span class="text-brand-cyan">HELLO.</span>
-                    </h2>
-                </div>
-                <div class="flex flex-col justify-center space-y-8">
-                    <h4 class="text-gray-500 uppercase tracking-widest font-bold text-sm">Ready to stand out?</h4>
-                    <p class="text-2xl text-white font-medium">Join hundreds of estate agents and homeowners in Kent & London who trust Planpix.</p>
-                    
-                    <div class="flex flex-col md:flex-row gap-8 text-lg font-bold">
-                        <a href="mailto:hello@planpix.com" class="flex items-center gap-3 hover:text-brand-cyan transition"><i class="fa-regular fa-envelope"></i> hello@planpix.com</a>
-                        <a href="tel:02081459989" class="flex items-center gap-3 hover:text-brand-cyan transition"><i class="fa-solid fa-phone"></i> 020 8145 9989</a>
-                    </div>
-                    
-                    <div class="flex gap-6 mt-8">
-                        <a href="#" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-cyan hover:border-brand-cyan transition duration-300"><i class="fa-brands fa-instagram text-xl"></i></a>
-                        <a href="#" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-cyan hover:border-brand-cyan transition duration-300"><i class="fa-brands fa-facebook-f text-xl"></i></a>
-                        <a href="#" class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-brand-cyan hover:border-brand-cyan transition duration-300"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-bold uppercase tracking-wide">
-                <p>&copy; 2026 Planpix. All Rights Reserved.</p>
-                <div class="flex gap-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                    <a href="#" class="hover:text-white transition">Terms & Conditions</a>
-                </div>
+        <div class="mt-20 pt-8 border-t border-blue-400 flex flex-col md:flex-row justify-between text-xs text-blue-100 uppercase tracking-tighter items-center">
+            <p>© 2026 Planpix Ltd. All Rights Reserved.</p>
+            <div class="space-x-4 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms & Conditions</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Animations
         AOS.init({
-            duration: 1000,
-            once: true,
+            duration: 800,
             easing: 'ease-out-cubic',
+            once: true,
             offset: 50
-        });
-
-        // Sticky Navigation Logic
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('py-0');
-                header.classList.remove('py-4');
-            } else {
-                header.classList.add('py-4');
-                header.classList.remove('py-0');
-            }
         });
     </script>
 </body>
