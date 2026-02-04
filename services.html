@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Planpix</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Quicksand', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            cyan: '#00B8F0',
+                            dark: '#1a1a1a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- FIXED BEFORE/AFTER SLIDER --- */
+        .comparison-slider {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 2.5rem;
+            cursor: ew-resize;
+            user-select: none;
+        }
+        .comparison-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .comparison-slider .img-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            border-right: 4px solid #fff;
+            z-index: 2;
+        }
+        /* Prevents the 'Growing' effect by keeping image width constant */
+        .comparison-slider .img-overlay img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-width: none;
+        }
+        .slider-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: #00B8F0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 10;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-white text-gray-800">
+
+    <header class="absolute top-0 w-full z-50 p-6 md:p-10 flex justify-between items-center bg-black/30 backdrop-blur-sm">
+        <div class="text-3xl font-bold tracking-tight flex items-center gap-2 drop-shadow-md text-white">
+            <i class="fa-solid fa-camera-retro text-brand-cyan"></i> Planpix
+        </div>
+        <nav class="hidden md:flex gap-8 text-sm font-bold text-white tracking-wide drop-shadow-md">
+            <a href="index.html" class="hover:text-brand-cyan transition duration-300">Home</a>
+            <a href="about_us.html" class="hover:text-brand-cyan transition duration-300">Our Story</a>
+            <a href="services.html" class="text-brand-cyan transition duration-300">Services</a>
+            <a href="portfolio.html" class="hover:text-brand-cyan transition duration-300">Portfolio</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <a href="say_hello.html" class="hidden md:block px-6 py-2.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white font-bold text-sm hover:bg-brand-cyan hover:border-brand-cyan transition duration-300">
+                Say Hello <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <section class="py-24 bg-white w-full pt-40">
+        <div class="text-center mb-16 px-6" data-aos="fade-up">
+            <span class="text-brand-cyan font-bold tracking-widest uppercase text-sm">What We Do</span>
+            <h2 class="text-4xl md:text-6xl font-bold mt-4 text-brand-dark">Our Core Services</h2>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Comprehensive visual marketing solutions for property experts.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 w-full mb-20">
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="0"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-camera text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Photography</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="100"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-regular fa-map text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Floor Plans</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="200"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-street-view text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Virtual Tours</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="300"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-plane-up text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Drone</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="400"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-chart-simple text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">EPC</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="500"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-regular fa-circle-play text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Video</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="600"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-moon text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Twilight Photo</h3></div></div>
+            <div class="group relative h-96 overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="700"><div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110"></div><div class="absolute inset-0 bg-brand-dark/80 group-hover:bg-brand-dark/60 transition duration-500"></div><div class="relative h-full flex flex-col justify-center items-center text-center p-8 z-10"><i class="fa-solid fa-star text-5xl text-brand-cyan mb-6 transform group-hover:-translate-y-2 transition duration-300"></i><h3 class="text-2xl font-bold text-white mb-2">Premium Photo</h3></div></div>
+        </div>
+
+        <div class="max-w-6xl mx-auto px-6" data-aos="zoom-in">
+            <div class="bg-brand-cyan rounded-[3rem] p-10 md:p-14 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-2xl shadow-brand-cyan/20">
+                <div class="text-center md:text-left relative z-10 max-w-xl">
+                    <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">All in one visit</h3>
+                    <p class="text-white/90 font-medium text-lg leading-relaxed">
+                        We produce stunning photographs, a floor plan, an Energy Performance and a virtual tour in a single visit.
+                    </p>
+                </div>
+                <div class="mt-8 md:mt-0 relative z-10">
+                    <button class="bg-white text-brand-cyan px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-50 hover:scale-105 transition-all duration-300 shadow-lg">
+                        Book Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+                <div class="absolute -right-20 -bottom-32 w-80 h-80 bg-white/10 rounded-full blur-xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white relative">
+        <div class="container mx-auto px-6 space-y-32">
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl font-bold mb-6">High-End <span class="text-brand-cyan">Photography</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">We utilize professional HDR techniques to capture spaces in their absolute best light, focusing on the architectural details that matter to buyers.</p>
+                </div>
+                <div class="rounded-[2.5rem] overflow-hidden shadow-xl h-[450px]" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4f9d?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 rounded-[2.5rem] overflow-hidden shadow-xl h-[450px]" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                </div>
+                <div class="order-1 md:order-2" data-aos="fade-left">
+                    <h2 class="text-4xl font-bold mb-6">Accurate <span class="text-brand-cyan">Floor Plans</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">Laser-measured accuracy for 2D and 3D visualization, helping potential buyers understand the property's potential instantly.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl font-bold mb-6">Immersive <span class="text-brand-cyan">Virtual Tours</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">360° walkthroughs that allow buyers to visit the home from anywhere in the world, reducing wasted viewings.</p>
+                </div>
+                <div class="rounded-[2.5rem] overflow-hidden shadow-xl h-[450px]" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 rounded-[2.5rem] overflow-hidden shadow-xl h-[450px]" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                </div>
+                <div class="order-1 md:order-2" data-aos="fade-left">
+                    <h2 class="text-4xl font-bold mb-6">Aerial <span class="text-brand-cyan">Drone Photography</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">Showcase the property's context, land plots, and roofing details with cinematic aerial perspectives.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl font-bold mb-6">Certified <span class="text-brand-cyan">EPCs</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">Fast and accredited Energy Performance Certificates delivered quickly to ensure compliance with listing regulations.</p>
+                </div>
+                <div class="rounded-[2.5rem] overflow-hidden shadow-xl h-[450px]" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="order-2 md:order-1 relative rounded-[2.5rem] overflow-hidden shadow-xl h-[450px] group cursor-pointer" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition">
+                        <div class="w-20 h-20 bg-brand-cyan text-white rounded-full flex items-center justify-center text-3xl shadow-lg"><i class="fa-solid fa-play ml-1"></i></div>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2" data-aos="fade-left">
+                    <h2 class="text-4xl font-bold mb-6">Cinematic <span class="text-brand-cyan">Property Video</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">Bring your property to life with high-impact reels and trailers designed for social media engagement.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl font-bold mb-6">Twilight <span class="text-brand-cyan">Marketing</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">The ultimate scroll-stopper. Reveal how we transform daytime shots into premium dusk masterpieces with our interactive slider.</p>
+                </div>
+                <div class="comparison-slider" id="slider-container" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80">
+                    <div class="img-overlay" id="img-overlay">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80">
+                    </div>
+                    <div class="slider-handle" id="slider-handle"><i class="fa-solid fa-arrows-left-right"></i></div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 items-center pb-20">
+                <div class="order-2 md:order-1 rounded-[2.5rem] overflow-hidden shadow-xl h-[450px]" data-aos="fade-right">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover">
+                </div>
+                <div class="order-1 md:order-2" data-aos="fade-left">
+                    <h2 class="text-4xl font-bold mb-6">Elite <span class="text-brand-cyan">Premium Packages</span></h2>
+                    <p class="text-gray-600 text-lg mb-6 leading-relaxed">Our most comprehensive marketing suite for luxury properties, including advanced retouching and priority turnaround.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-brand-cyan text-white py-20 px-8 rounded-t-[100px]">
+        <div class="max-w-7xl mx-auto text-center md:text-left">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-white/20 pb-12 mb-12">
+                 <div>
+                    <h3 class="text-4xl font-bold mb-4">Planpix</h3>
+                    <p class="text-blue-100">Your local property marketing specialists since 2013.</p>
+                 </div>
+                 <a href="tel:02081459989" class="bg-white text-brand-cyan px-10 py-4 rounded-full font-bold text-lg">Call Us Today</a>
+            </div>
+            <p class="text-center text-blue-100 text-xs uppercase tracking-widest font-bold">© 2026 Planpix Ltd. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const sliderContainer = document.getElementById('slider-container');
+        const overlay = document.getElementById('img-overlay');
+        const handle = document.getElementById('slider-handle');
+
+        let isDragging = false;
+
+        const moveSlider = (e) => {
+            if (!isDragging) return;
+            const rect = sliderContainer.getBoundingClientRect();
+            let x = (e.pageX || e.touches[0].pageX) - rect.left;
+            let percentage = (x / rect.width) * 100;
+
+            if (percentage < 0) percentage = 0;
+            if (percentage > 100) percentage = 100;
+
+            overlay.style.width = percentage + "%";
+            handle.style.left = percentage + "%";
+        };
+
+        sliderContainer.addEventListener('mousedown', () => isDragging = true);
+        sliderContainer.addEventListener('touchstart', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('touchend', () => isDragging = false);
+        window.addEventListener('mousemove', moveSlider);
+        window.addEventListener('touchmove', moveSlider);
+
+        AOS.init({ duration: 800, once: true });
+    </script>
+</body>
+</html>

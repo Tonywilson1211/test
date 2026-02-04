@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Planpix</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Quicksand', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            cyan: '#00B8F0',
+                            dark: '#1a1a1a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes scrollUp { 0% { transform: translateY(0); } 100% { transform: translateY(-50%); } }
+        @keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+        .animate-scroll-up { animation: scrollUp 20s linear infinite; }
+        .animate-scroll-down { animation: scrollDown 20s linear infinite; }
+        .mask-gradient-y {
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+        }
+        .bg-noise {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-white text-gray-800">
+
+    <header class="absolute top-0 w-full z-50 p-6 md:p-10 flex justify-between items-center bg-black/30 backdrop-blur-sm">
+        <div class="text-3xl font-bold tracking-tight flex items-center gap-2 drop-shadow-md text-white">
+            <i class="fa-solid fa-camera-retro text-brand-cyan"></i> Planpix
+        </div>
+        <nav class="hidden md:flex gap-8 text-sm font-bold text-white tracking-wide drop-shadow-md">
+            <a href="index.html" class="hover:text-brand-cyan transition duration-300">Home</a>
+            <a href="about_us.html" class="text-brand-cyan transition duration-300">Our Story</a>
+            <a href="services.html" class="hover:text-brand-cyan transition duration-300">Services</a>
+            <a href="portfolio.html" class="hover:text-brand-cyan transition duration-300">Portfolio</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <a href="say_hello.html" class="hidden md:block px-6 py-2.5 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-white font-bold text-sm hover:bg-brand-cyan hover:border-brand-cyan transition duration-300">
+                Say Hello <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <section class="relative h-[60vh] w-full overflow-hidden flex flex-col justify-center bg-brand-dark">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-brand-dark"></div>
+        </div>
+        <div class="relative z-10 container mx-auto px-6 text-center" data-aos="zoom-out">
+            <span class="text-brand-cyan font-bold tracking-widest uppercase text-sm mb-4 block">Who We Are</span>
+            <h1 class="text-5xl md:text-8xl font-bold text-white leading-tight">Our <span class="text-brand-cyan text-outline">Story</span></h1>
+        </div>
+    </section>
+
+    <section class="py-24 bg-brand-dark text-white relative">
+        <div class="absolute inset-0 opacity-[0.03] pointer-events-none z-0 bg-noise"></div>
+        <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center relative z-10">
+            <div data-aos="fade-right">
+                <span class="text-brand-cyan font-bold uppercase text-xs tracking-widest mb-4 block">Established 10+ Years</span>
+                <h2 class="text-4xl font-bold mb-8 leading-tight">We're passionate about <br><span class="text-brand-cyan">bringing spaces to life.</span></h2>
+                <div class="space-y-6 text-gray-300 text-lg leading-relaxed">
+                    <p><span class="text-brand-cyan font-bold text-2xl">P</span>lanpix have been helping people market their properties for over 10 years now, and we are very proud of the excellent reputation we have developed as a professional and friendly business.</p>
+                    <p>We started out offering EPCs to a small number of clients in and around Bexley. Word soon spread and as our reputation grew we began to add floor plans and high end photography to our list of services.</p>
+                    <p>We now offer a one-stop-shop to estate agents and property owners alike by producing stunning photographs, a floor plan, an Energy Performance and a virtual tour in a single visit. All at market leading rates.</p>
+                </div>
+            </div>
+            <div class="h-[500px] grid grid-cols-2 gap-4 mask-gradient-y" data-aos="fade-left">
+                <div class="flex flex-col gap-4 animate-scroll-up">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=400&q=80" class="rounded-3xl h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&q=80" class="rounded-3xl h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=400&q=80" class="rounded-3xl h-64 object-cover">
+                </div>
+                <div class="flex flex-col gap-4 animate-scroll-down">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=400&q=80" class="rounded-3xl h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80" class="rounded-3xl h-64 object-cover">
+                    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=400&q=80" class="rounded-3xl h-64 object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white">
+        <div class="container mx-auto px-6 text-center mb-16" data-aos="fade-up">
+            <h2 class="text-4xl md:text-5xl font-bold text-brand-dark">Our Certifications</h2>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto font-medium">We maintain the highest international standards in property marketing and valuation.</p>
+        </div>
+        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-8">
+            <div class="bg-brand-light p-10 rounded-[3rem] border border-gray-100 group hover:border-brand-cyan transition duration-500" data-aos="fade-up" data-aos-delay="0">
+                <div class="w-20 h-20 bg-brand-cyan/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-cyan transition-colors duration-500">
+                    <i class="fa-solid fa-ruler-combined text-4xl text-brand-cyan group-hover:text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">RICS Certified</h3>
+                <p class="text-gray-600 leading-relaxed font-medium">Our photographers are trained RICS Certified Property Measurers, promoting the highest international standards in real estate.</p>
+            </div>
+            <div class="bg-brand-light p-10 rounded-[3rem] border border-gray-100 group hover:border-brand-cyan transition duration-500" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-20 h-20 bg-brand-cyan/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-cyan transition-colors duration-500">
+                    <i class="fa-solid fa-award text-4xl text-brand-cyan group-hover:text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Royal Photographic Society</h3>
+                <p class="text-gray-600 leading-relaxed font-medium">Members since 1853, our mission is to promote the highest standards of photography in every shoot we undertake.</p>
+            </div>
+            <div class="bg-brand-light p-10 rounded-[3rem] border border-gray-100 group hover:border-brand-cyan transition duration-500" data-aos="fade-up" data-aos-delay="200">
+                <div class="w-20 h-20 bg-brand-cyan/10 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-brand-cyan transition-colors duration-500">
+                    <i class="fa-solid fa-bolt text-4xl text-brand-cyan group-hover:text-white"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Quidos Certified</h3>
+                <p class="text-gray-600 leading-relaxed font-medium">All photographers are qualified to produce Energy Performance Certificates (EPCs), certified by Quidos.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-cyan text-white py-20 px-8 rounded-t-[60px] md:rounded-t-[100px] mt-0">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 text-center md:text-left">
+            <div>
+                <h3 class="text-3xl font-bold mb-6 flex items-center justify-center md:justify-start gap-2">
+                    <i class="fa-solid fa-camera-retro"></i> Planpix
+                </h3>
+                <p class="text-blue-100 mb-8">Your local property marketing specialists since 2013.</p>
+                <a href="mailto:hello@planpix.com" class="text-xl font-bold border-b-2 border-white pb-2 hover:text-brand-dark transition">hello@planpix.com</a>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase tracking-widest text-sm text-blue-100">Quick Links</h4>
+                <ul class="space-y-3 text-white font-medium">
+                    <li><a href="index.html" class="hover:text-brand-dark transition">Home</a></li>
+                    <li><a href="about_us.html" class="hover:text-brand-dark transition">Our Story</a></li>
+                    <li><a href="services.html" class="hover:text-brand-dark transition">Our Services</a></li>
+                    <li><a href="portfolio.html" class="hover:text-brand-dark transition">Our Portfolio</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-6 uppercase tracking-widest text-sm text-blue-100">Connect</h4>
+                <p class="text-white font-bold text-lg mb-2">020 8145 9989</p>
+                <div class="mt-6 flex justify-center md:justify-start space-x-6 text-2xl">
+                    <a href="#" class="hover:text-brand-dark transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover:text-brand-dark transition"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({ duration: 800, once: true });
+    </script>
+</body>
+</html>
